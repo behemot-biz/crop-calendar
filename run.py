@@ -15,4 +15,19 @@ SHEET = GSPPRED_CLIENT.open('crop_calendar')
 
 plants = SHEET.worksheet('plant_list')
 data = plants.get_all_values()
-print(data)
+
+# print(data)
+def select_plants():
+    print("Welcome to the Crop Calendar Planner!\n")
+
+def get_action():
+    pass
+
+def get_date():
+    pass
+
+def get_selected_plants():
+    pass
+
+def store_results():
+    pass
