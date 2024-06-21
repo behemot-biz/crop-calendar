@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from classes.table_creator import TableCreator
+from datetime import datetime
 
 
 SCOPE = [
@@ -61,10 +62,23 @@ def select_plants():
             return user_list
 
 def get_action():
-    pass
+
+    while True:
+        action = input("Do you want to enter a date for planting seeds (P) or a date for harvest (H)? ").strip().upper()
+        if action in ['P', 'H']:
+            return action
+        else:
+            print("Invalid choice. Please enter 'P' for planting or 'H' for harvest.")
 
 def get_date():
-    pass
+
+    while True:
+        date_str = input("Enter the date (YYYY-MM-DD): ").strip()
+        try:
+            input_date = datetime.strptime(date_str, "%Y-%m-%d")
+            return date_str  # Exit the loop if date is valid
+        except ValueError:
+            print("Invalid date format. Please enter the date in YYYY-MM-DD format.")
 
 def get_selected_plants():
     pass
