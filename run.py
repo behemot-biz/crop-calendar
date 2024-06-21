@@ -32,10 +32,10 @@ def select_plants():
     
 
     print("Welcome to the Crop Calendar Planner!\n")
-    print(f"{table} \n\n")
+    print(f"{table} \n")
     print("Type in the plant number from the list above, if you want multiple plants, ")
-    print("use comma sign to separate them.\n")
-    print("Example: 1,7,8,12\n")
+    print("use comma sign to separate them. Example: 1,7,8,12\n")
+    # print("Example: 1,7,8,12\n")
     while True:
         data_str = input("Enter your numbers here: \n")
         # print(f"Numbers entered are: {data_str} \n\n")
@@ -104,7 +104,6 @@ def get_selected_plants(data, user_selection):
     results = PrettyTable()
     results.border = False
     results.align = "l"
-    results.header = False
     results.padding_width = 5
 
     user_list_data = []
@@ -114,7 +113,7 @@ def get_selected_plants(data, user_selection):
         for plant in plants:
             harvest_date = input_date + timedelta(days=plant.total_growth_time())
             results.add_row([plant.name, input_date.strftime('%Y-%m-%d'), harvest_date.strftime('%Y-%m-%d')])
-           
+            user_list_data.append([plant.name, "Planting Date", input_date.strftime('%Y-%m-%d'), harvest_date.strftime('%Y-%m-%d')])
         
         print("\nPlanting Schedule: \n")
         print(results)
@@ -124,15 +123,31 @@ def get_selected_plants(data, user_selection):
         for plant in plants:    
             planting_date = input_date - timedelta(days=plant.total_growth_time())
             results.add_row([plant.name, planting_date.strftime('%Y-%m-%d'), input_date.strftime('%Y-%m-%d')])
-            
+            user_list_data.append([plant.name, "Harvest Date", input_date.strftime('%Y-%m-%d'), planting_date.strftime('%Y-%m-%d')])
         
         print("\nHarvest Schedule:\n")
         print(results)
+    
+    # Ask the user if they want to store the results
+    store_choice = input("\nDo you want to store this data? (Y/N): ").strip().upper()
+    if store_choice == 'Y':
+        email = input("Enter your email address: ").strip()
+        store_results(email, user_list_data)
+        print("Data has been stored successfully.")
+    else:
+        print("Data was not stored.")
+    return user_list_data, action, results
 
-    return user_list_data, action
-
-def store_results():
-    pass
+def store_results(email, results):
+    clear_terminal()
+    results_sheet = SHEET.worksheet('user_results')
+    # Add headers if the sheet is empty
+    if len(results_sheet.get_all_values()) == 0:
+        results_sheet.append_row(["Email", "Plant", "Date Type", "Date", "Corresponding Date"])
+    
+    for result in results:
+        results_sheet.append_row([email] + result)
+    
 
 def clear_terminal():
     if platform.system == "windows":
@@ -140,8 +155,19 @@ def clear_terminal():
     else:
         os.system("clear")
 
+def main():
+    while True:
+        clear_terminal()
+        user_list = select_plants()
+        user_list_data = get_selected_plants(data_plants, user_list)
+        # store_results(user_list_data)
+    
+        # Ask the user if they want to run the program again
+        repeat = input("\nDo you want to add more plants? (Y/N): ").strip().upper()
+        if repeat != 'Y':
+            print("Thank you for using the Crop Calendar Planner!")
+            break
 
-clear_terminal()
-user_list = select_plants()
-get_selected_plants(data_plants, user_list)
+main()
+
 
