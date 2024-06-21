@@ -4,6 +4,9 @@ from classes.table_creator import TableCreator
 from datetime import datetime, timedelta
 from classes.plant import Plant
 from prettytable import PrettyTable
+# clear terminal
+import os
+import platform
 
 
 
@@ -126,7 +129,14 @@ def get_selected_plants(data, user_selection):
 def store_results():
     pass
 
+def clear_terminal():
+    if platform.system == "windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
+
+clear_terminal()
 user_list = select_plants()
 get_selected_plants(data_plants, user_list)
 
