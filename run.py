@@ -1,7 +1,10 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from classes.table_creator import TableCreator
-from datetime import datetime
+from datetime import datetime, timedelta
+from classes.plant import Plant
+from prettytable import PrettyTable
+
 
 
 SCOPE = [
@@ -80,11 +83,50 @@ def get_date():
         except ValueError:
             print("Invalid date format. Please enter the date in YYYY-MM-DD format.")
 
-def get_selected_plants():
-    pass
+def get_selected_plants(data, user_selection):
+
+    action = get_action()
+    date_str = get_date()
+
+    input_date = datetime.strptime(date_str, "%Y-%m-%d")
+      # Create dictionary from data
+    data_dict = {row[0]: row for row in data}
+    
+    # Get matching rows based on user selection
+    matching_rows = [data_dict[str(id)] for id in user_selection if str(id) in data_dict]
+    
+    # Create Plant objects from matching rows
+    plants = [Plant(*row) for row in matching_rows]
+
+    results = PrettyTable()
+    user_list_data = []
+    
+    if action == 'P':
+        results.field_names = ["Plant", "Planting Date", "Estimated Harvest Date"]
+        for plant in plants:
+            harvest_date = input_date + timedelta(days=plant.total_growth_time())
+            results.add_row([plant.name, input_date.strftime('%Y-%m-%d'), harvest_date.strftime('%Y-%m-%d')])
+           
+        
+        print("\nPlanting Schedule:")
+        print(results)
+
+    elif action == 'H':
+        results.field_names = ["Plant", "Estimated Planting Date", "Harvest Date"]
+        for plant in plants:    
+            planting_date = input_date - timedelta(days=plant.total_growth_time())
+            results.add_row([plant.name, planting_date.strftime('%Y-%m-%d'), input_date.strftime('%Y-%m-%d')])
+            
+        
+        print("\nHarvest Schedule:")
+        print(results)
+
+    return user_list_data, action
 
 def store_results():
     pass
 
 
-user_list_data = select_plants()
+user_list = select_plants()
+get_selected_plants(data_plants, user_list)
+
