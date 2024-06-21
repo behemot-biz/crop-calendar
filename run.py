@@ -102,6 +102,11 @@ def get_selected_plants(data, user_selection):
     plants = [Plant(*row) for row in matching_rows]
 
     results = PrettyTable()
+    results.border = False
+    results.align = "l"
+    results.header = False
+    results.padding_width = 5
+
     user_list_data = []
     
     if action == 'P':
@@ -111,7 +116,7 @@ def get_selected_plants(data, user_selection):
             results.add_row([plant.name, input_date.strftime('%Y-%m-%d'), harvest_date.strftime('%Y-%m-%d')])
            
         
-        print("\nPlanting Schedule:")
+        print("\nPlanting Schedule: \n")
         print(results)
 
     elif action == 'H':
@@ -121,7 +126,7 @@ def get_selected_plants(data, user_selection):
             results.add_row([plant.name, planting_date.strftime('%Y-%m-%d'), input_date.strftime('%Y-%m-%d')])
             
         
-        print("\nHarvest Schedule:")
+        print("\nHarvest Schedule:\n")
         print(results)
 
     return user_list_data, action

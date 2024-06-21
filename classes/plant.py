@@ -1,5 +1,3 @@
-from utils import determine_category
-
 class Plant:
     def __init__(self, id, name, category, germination, seedling_stage, vegetative_growth, flowering_root_development, fruit_development, description):
         self.id = id
