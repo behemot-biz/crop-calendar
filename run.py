@@ -37,7 +37,7 @@ def select_plants():
     print("use comma sign to separate them.\n")
     print("Example: 1,7,8,12\n")
     while True:
-        data_str = input("Enter your numbers here: ")
+        data_str = input("Enter your numbers here: \n")
         # print(f"Numbers entered are: {data_str} \n\n")
 
         selected_plants = data_str.split(",")
@@ -70,7 +70,7 @@ def select_plants():
 def get_action():
 
     while True:
-        action = input("Do you want to enter a date for planting seeds (P) or a date for harvest (H)? ").strip().upper()
+        action = input("Do you want to enter a date for planting seeds (P) or a date for harvest (H)? \n").strip().upper()
         if action in ['P', 'H']:
             return action
         else:
@@ -79,7 +79,7 @@ def get_action():
 def get_date():
 
     while True:
-        date_str = input("Enter the date (YYYY-MM-DD): ").strip()
+        date_str = input("Enter the date (YYYY-MM-DD): \n").strip()
         try:
             input_date = datetime.strptime(date_str, "%Y-%m-%d")
             return date_str  # Exit the loop if date is valid
