@@ -63,8 +63,8 @@ def select_plants():
                 break
 
         if valid_input:
-            print(f"userlist {user_list}. Operation success")
-            
+            # print(f"userlist {user_list}. Operation success")
+            clear_terminal()
             return user_list
 
 def get_action():
@@ -139,7 +139,7 @@ def get_selected_plants(data, user_selection):
     return user_list_data, action, results
 
 def store_results(email, results):
-    clear_terminal()
+    # clear_terminal()
     results_sheet = SHEET.worksheet('user_results')
     # Add headers if the sheet is empty
     if len(results_sheet.get_all_values()) == 0:
