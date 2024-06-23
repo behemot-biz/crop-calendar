@@ -4,7 +4,6 @@ from classes.table_creator import TableCreator
 from datetime import datetime, timedelta
 from classes.plant import Plant
 from prettytable import PrettyTable
-# clear terminal
 import os
 import platform
 
@@ -29,11 +28,10 @@ def select_plants():
     Returns:
         list: A list of selected plant indices.
     """
-    
+    clear_terminal()
     table_creator = TableCreator(data_plants)
     table = table_creator.create_main_table()
     
-    print("Welcome to the Crop Calendar Planner!\n")
     print(f"{table} \n")
     print("Type in the plant number from the list above, if you want multiple plants, ")
     print("use comma sign to separate them. Example: 1,8,12\n")
@@ -74,7 +72,7 @@ def get_action():
         str: 'P' for planting or 'H' for harvest.
     """
     while True:
-        action = input("Do you want to enter a date for planting seeds (P) or a date for harvest (H)? \n").strip().upper()
+        action = input("Do you want to plan for planting seeds (P) or a date for harvest (H)? \n").strip().upper()
         if action in ['P', 'H']:
             return action
         else:
@@ -179,12 +177,30 @@ def clear_terminal():
     else:
         os.system("clear")
 
+def welcome_message():
+    """
+    Display the welcome message and introduction to using the Crop Calendar Planner app.
+    """
+    clear_terminal()
+    print("Welcome to the Crop Calendar Planner!")
+    print("\nThis tool is designed to help you plan your planting and harvesting times efficiently.")
+    print("Whether you're a seasoned gardener or just starting out, this tool will guide you through the process of determining the best dates for planting and harvesting your crops.")
+    print("\nHere's how to get started:")
+    print("1. You will be presented with a list of plants to choose from.")
+    print("2. Select the plants you're interested in by entering their corresponding numbers.")
+    print("3. Decide whether you want to input a planting date or a desired harvest date.")
+    print("4. Enter the date, and the app will calculate the corresponding planting or harvest dates for you.")
+    print("5. You can save the results for future reference by providing your email address.")
+    print("\nLet's get started and make your gardening experience more organized and productive!")
+    # print("-" * 50)
+    input("\nPress Enter to continue...\n")
+
 def main():
     """
     Main function to run the Crop Calendar Planner application.
     """
     while True:
-        clear_terminal()
+        welcome_message()
         user_list = select_plants()
         user_list_data = get_selected_plants(data_plants, user_list)
         # store_results(user_list_data)
@@ -194,6 +210,8 @@ def main():
             print("Thank you for using the Crop Calendar Planner!")
             break
 
-main()
+if __name__ == "__main__":
+    main()
+
 
 
