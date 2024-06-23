@@ -186,6 +186,7 @@ def get_selected_plants(data, user_selection):
     store_choice = input(
         "\nDo you want to store this data? (Y/N): "
     ).strip().upper()
+
     if store_choice == 'Y':
         email = input("Enter your email address: ").strip()
         store_results(email, user_list_data)
@@ -213,6 +214,44 @@ def store_results(email, results):
 
     for result in results:
         results_sheet.append_row([email] + result)
+
+
+def fetch_user_data(email):
+    """
+    """
+    results_sheet = SHEET.worksheet('user_results')
+
+    all_records = results_sheet.get_all_records()
+
+    user_data = [
+        record for record in all_records
+        if record['Email'] == email
+    ]
+
+    return user_data
+
+
+def display_user_data(user_data):
+    """
+    """
+    if not user_data:
+        print("No data found for the provided email address.")
+        return
+    results = PrettyTable()
+    results.field_names = [
+        "Plant", "Date Type", "Date", "Corresponding Date"
+    ]
+
+    for record in user_data:
+        results.add_row([
+            record["Plant"],
+            record["Date Type"],
+            record["Date"],
+            record["Corresponding Date"]
+        ])
+
+    print("\nYour Stored Data:\n")
+    print(results)
 
 
 def clear_terminal():
@@ -260,16 +299,40 @@ def main():
     """
     while True:
         welcome_message()
-        user_list = select_plants()
-        user_list_data = get_selected_plants(data_plants, user_list)
-        # store_results(user_list_data)
+        user_choice = input(
+            "Would you like to (1) Plan crops or (2) View your stored data?"
+            " Enter 1 or 2: "
+        ).strip()
 
-        repeat = input(
-            "\nDo you want to add more plants? (Y/N): "
-        ).strip().upper()
-        if repeat != 'Y':
-            print("Thank you for using the Crop Calendar Planner!")
-            break
+        if user_choice == '1':
+            user_list = select_plants()
+            user_list_data = get_selected_plants(data_plants, user_list)
+
+            # Ask the user if they want to run the program again
+            repeat = input(
+                "\nWould you like to add more plants? (Y/N): "
+            ).strip().upper()
+            if repeat != 'Y':
+                print("Thank you for using the Crop Calendar Planner!")
+                break
+
+        elif user_choice == '2':
+            email = input(
+                "Please enter your email address to fetch your stored data: "
+            ).strip()
+            user_data = fetch_user_data(email)
+            display_user_data(user_data)
+
+            # Ask the user if they want to perform another action
+            repeat = input(
+                "\nWould you like to perform another action? (Y/N): "
+            ).strip().upper()
+            if repeat != 'Y':
+                print("Thank you for using the Crop Calendar Planner!")
+                break
+
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
 
 
 if __name__ == "__main__":
