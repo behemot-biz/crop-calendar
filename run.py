@@ -8,8 +8,6 @@ from prettytable import PrettyTable
 import os
 import platform
 
-
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -24,35 +22,37 @@ SHEET = GSPPRED_CLIENT.open('crop_calendar')
 plants = SHEET.worksheet('plant_list')
 data_plants = plants.get_all_values()
 
-# print(data)
 def select_plants():
-    # Create an instance of TableCreator
+    """
+    Display a table of plants and allow the user to select multiple plants by entering their numbers.
+    
+    Returns:
+        list: A list of selected plant indices.
+    """
+    
     table_creator = TableCreator(data_plants)
     table = table_creator.create_main_table()
     
-
     print("Welcome to the Crop Calendar Planner!\n")
     print(f"{table} \n")
     print("Type in the plant number from the list above, if you want multiple plants, ")
-    print("use comma sign to separate them. Example: 1,7,8,12\n")
-    # print("Example: 1,7,8,12\n")
+    print("use comma sign to separate them. Example: 1,8,12\n")
+    
     while True:
-        data_str = input("Enter your numbers here: \n")
-        # print(f"Numbers entered are: {data_str} \n\n")
+        data_str = input("Enter one or more plant numbers: \n")
 
         selected_plants = data_str.split(",")
         user_list = []
         valid_input = True
 
         for plant_id in selected_plants:
-            # print(data_plants)
+            
             try:
-                idx = int(plant_id.strip())  # Strip any extra whitespace
+                idx = int(plant_id.strip())
                 if str(idx) in data_plants[idx][0]:
                     user_list.append(idx)
 
             except IndexError:
-                # Handle the IndexError if the index is out of range
                 print(f"IndexError: The item {idx} does not exist, select a number from the list.")
                 valid_input = False
                 break
@@ -63,12 +63,16 @@ def select_plants():
                 break
 
         if valid_input:
-            # print(f"userlist {user_list}. Operation success")
             clear_terminal()
             return user_list
 
 def get_action():
-
+    """
+    Prompt the user to choose between entering a planting date or a harvest date.
+    
+    Returns:
+        str: 'P' for planting or 'H' for harvest.
+    """
     while True:
         action = input("Do you want to enter a date for planting seeds (P) or a date for harvest (H)? \n").strip().upper()
         if action in ['P', 'H']:
@@ -77,7 +81,12 @@ def get_action():
             print("Invalid choice. Please enter 'P' for planting or 'H' for harvest.")
 
 def get_date():
-
+    """
+    Prompt the user to enter a date and validate the format.
+    
+    Returns:
+        str: A valid date string in YYYY-MM-DD format.
+    """
     while True:
         date_str = input("Enter the date (YYYY-MM-DD): \n").strip()
         try:
@@ -87,18 +96,24 @@ def get_date():
             print("Invalid date format. Please enter the date in YYYY-MM-DD format.")
 
 def get_selected_plants(data, user_selection):
+    """
+    Calculate and display planting or harvest dates based on user selection.
+    
+    Args:
+        data (list): The list of plant data from the Google Sheet.
+        user_selection (list): The list of selected plant indices.
+    
+    Returns:
+        tuple: Contains user_list_data, action, and results table.
+    """
 
     action = get_action()
     date_str = get_date()
 
     input_date = datetime.strptime(date_str, "%Y-%m-%d")
-      # Create dictionary from data
+      
     data_dict = {row[0]: row for row in data}
-    
-    # Get matching rows based on user selection
     matching_rows = [data_dict[str(id)] for id in user_selection if str(id) in data_dict]
-    
-    # Create Plant objects from matching rows
     plants = [Plant(*row) for row in matching_rows]
 
     results = PrettyTable()
@@ -128,7 +143,6 @@ def get_selected_plants(data, user_selection):
         print("\nHarvest Schedule:\n")
         print(results)
     
-    # Ask the user if they want to store the results
     store_choice = input("\nDo you want to store this data? (Y/N): ").strip().upper()
     if store_choice == 'Y':
         email = input("Enter your email address: ").strip()
@@ -139,9 +153,16 @@ def get_selected_plants(data, user_selection):
     return user_list_data, action, results
 
 def store_results(email, results):
-    # clear_terminal()
+    """
+    Store the user's results in the 'user_results' worksheet.
+    
+    Args:
+        email (str): The user's email address.
+        results (list): The list of results to store.
+    """
+    
     results_sheet = SHEET.worksheet('user_results')
-    # Add headers if the sheet is empty
+    
     if len(results_sheet.get_all_values()) == 0:
         results_sheet.append_row(["Email", "Plant", "Date Type", "Date", "Corresponding Date"])
     
@@ -150,19 +171,24 @@ def store_results(email, results):
     
 
 def clear_terminal():
+    """
+    Clear the terminal screen.
+    """
     if platform.system == "windows":
         os.system("cls")
     else:
         os.system("clear")
 
 def main():
+    """
+    Main function to run the Crop Calendar Planner application.
+    """
     while True:
         clear_terminal()
         user_list = select_plants()
         user_list_data = get_selected_plants(data_plants, user_list)
         # store_results(user_list_data)
     
-        # Ask the user if they want to run the program again
         repeat = input("\nDo you want to add more plants? (Y/N): ").strip().upper()
         if repeat != 'Y':
             print("Thank you for using the Crop Calendar Planner!")
