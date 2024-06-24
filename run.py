@@ -80,11 +80,11 @@ def welcome_message():
     """
     clear_terminal()
     print("\n Welcome to the Crop Calendar Planner!\n")
-    print(" This application is designed to help you plan your planting and ")
-    print(" harvesting times efficiently. Whether you're a seasoned gardener or ")
-    print(" just starting out, this tool will guide you through the process of ")
-    print(" determining the best dates for planting and harvesting your crops.")
-        
+    print(" This application is designed to help you plan your planting and")
+    print(" harvesting times efficiently.")
+    print(" Whether you're a seasoned gardener or just starting out, this")
+    print(" tool will guide you through the process of choosing the best")
+    print(" dates for planting and harvesting your crops.")
     print("\n\n Let's get started and make your gardening experience")
     print(" more organized and productive!")
     input("\n Press Enter to continue...")
@@ -107,7 +107,8 @@ def view_stored_data():
     Function to view stored data by entering the user's email.
     """
     clear_terminal()
-    print("\n To view your plant data, you need to enter your email address.\n")
+    print(f"\n To view your plant data, "
+          "you need to enter your email address.\n")
     email = input(
         " Enter email address: "
     ).strip()
@@ -130,7 +131,7 @@ def select_plants():
     table = table_creator.create_main_table()
 
     print(f"{table} \n")
-    print(" Type in the plant number from the list above, if you want multiple")
+    print(" Type in the plant number from the list, if you want multiple")
     print(" plants, use comma sign to separate them. Example: 1,8,12\n")
 
     while True:
@@ -146,7 +147,8 @@ def select_plants():
                 if str(idx) in data_plants[idx][0]:
                     user_list.append(idx)
                 elif idx < 0:
-                    print(f" Invalid input '{idx}'. Please enter positive numbers only.")
+                    print(f" Invalid input '{idx}'. "
+                          "Please enter positive numbers only.")
                     valid_input = False
                     break
             except IndexError:
