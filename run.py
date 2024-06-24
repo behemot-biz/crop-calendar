@@ -21,13 +21,33 @@ SHEET = GSPPRED_CLIENT.open('crop_calendar')
 plants = SHEET.worksheet('plant_list')
 data_plants = plants.get_all_values()
 
+
+def clear_terminal():
+    """
+    Clear the terminal screen.
+    """
+    if platform.system == "windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
 def display_menu(options):
+    """
+    Display a menu of options and return the user's choice.
+
+    Args:
+        options (list): A list of menu options.
+
+    Returns:
+        int: The user's selected option.
+    """
     clear_terminal()
     print("Menu:")
     for i, option in enumerate(options, start=1):
         print(f"{i}. {option}")
     while True:
-        try: 
+        try:
             choice = int(input("enter your choice: ").strip())
             if 1 <= choice <= len(options):
                 return choice
@@ -38,6 +58,9 @@ def display_menu(options):
 
 
 def main_menu():
+    """
+    Display the main menu and handle user selection.
+    """
     options = ["Plan crops", "View stored data", "Exit"]
     while True:
         choice = display_menu(options)
@@ -50,6 +73,35 @@ def main_menu():
             break
 
 
+def welcome_message():
+    """
+    Display the welcome message and introduction to using the
+    Crop Calendar Planner app.
+    """
+    clear_terminal()
+    print("Welcome to the Crop Calendar Planner!")
+    print(
+        "\n This application is designed to help you plan your planting and "
+        " harvesting times efficiently. Whether you're a seasoned gardener or "
+        " just starting out, this tool will guide you through the process of "
+        " determining the best dates for planting and harvesting your crops."
+        "\n\nQuick guide:"
+        "\n1. You will be presented with a list of plants to choose from."
+        "\n2. Select the plants you're interested in by entering their "
+        "corresponding numbers."
+        "\n3. Decide whether you want to input a planting date or a desired "
+        "harvest date."
+        "\n4. Enter the date, and the app will calculate the corresponding "
+        "planting or harvest dates for you."
+        "\n5. You can save the results for future reference by providing your "
+        "email address."
+        "\n6. You can also view your previously stored data."
+        "\n\nLet's get started and make your gardening experience more "
+        "organized and productive!"
+    )
+    input("\nPress Enter to continue...")
+
+
 def plan_crops():
     """
     Function to plan crops by selecting plants and calculating dates.
@@ -57,15 +109,21 @@ def plan_crops():
     # print("plan crops option")
     user_list = select_plants()
     if user_list:
-        user_list_data, action, results = get_selected_plants(data_plants, user_list)
+        user_list_data, action, results = get_selected_plants(
+            data_plants, user_list
+        )
         print("\nResults:\n")
         print(results)
         store_data_prompt(user_list_data)
 
 
 def view_stored_data():
-    print("view stored data option")
-    email = input("Please enter your email address to fetch your stored data: ").strip()
+    """
+    Function to view stored data by entering the user's email.
+    """
+    email = input(
+        "Please enter your email address to fetch your stored data: "
+    ).strip()
     user_data = fetch_user_data(email)
     display_user_data(user_data)
     input("\nPress Enter to return to the main menu...")
@@ -254,7 +312,6 @@ def store_data_prompt(user_list_data):
         print("Data was not stored.")
 
 
-
 def store_results(email, results):
     """
     Store the user's results in the 'user_results' worksheet.
@@ -276,6 +333,14 @@ def store_results(email, results):
 
 def fetch_user_data(email):
     """
+    Fetch user data from the 'user_results' worksheet 
+    based on the provided email address.
+
+    Args:
+        email (str): The user's email address.
+
+    Returns:
+        list: A list of user data records.
     """
     results_sheet = SHEET.worksheet('user_results')
 
@@ -291,6 +356,10 @@ def fetch_user_data(email):
 
 def display_user_data(user_data):
     """
+    Display the user's stored data in a formatted table.
+
+    Args:
+        user_data (list): The list of user data records.
     """
     if not user_data:
         print("No data found for the provided email address.")
@@ -310,45 +379,6 @@ def display_user_data(user_data):
 
     print("\nYour Stored Data:\n")
     print(results)
-
-
-def clear_terminal():
-    """
-    Clear the terminal screen.
-    """
-    if platform.system == "windows":
-        os.system("cls")
-    else:
-        os.system("clear")
-
-
-def welcome_message():
-    """
-    Display the welcome message and introduction to using the
-    Crop Calendar Planner app.
-    """
-    clear_terminal()
-    print("Welcome to the Crop Calendar Planner!")
-    print(
-        "\n This application is designed to help you plan your planting and "
-        " harvesting times efficiently. Whether you're a seasoned gardener or "
-        " just starting out, this tool will guide you through the process of "
-        " determining the best dates for planting and harvesting your crops."
-        "\n\nQuick guide:"
-        "\n1. You will be presented with a list of plants to choose from."
-        "\n2. Select the plants you're interested in by entering their "
-        "corresponding numbers."
-        "\n3. Decide whether you want to input a planting date or a desired "
-        "harvest date."
-        "\n4. Enter the date, and the app will calculate the corresponding "
-        "planting or harvest dates for you."
-        "\n5. You can save the results for future reference by providing your "
-        "email address."
-        "\n6. You can also view your previously stored data."
-        "\n\nLet's get started and make your gardening experience more "
-        "organized and productive!"
-    )
-    input("\nPress Enter to continue...")
 
 
 def main():
