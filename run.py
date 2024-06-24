@@ -81,21 +81,11 @@ def welcome_message():
     clear_terminal()
     print("Welcome to the Crop Calendar Planner!")
     print(
-        "\n This application is designed to help you plan your planting and "
-        " harvesting times efficiently. Whether you're a seasoned gardener or "
-        " just starting out, this tool will guide you through the process of "
-        " determining the best dates for planting and harvesting your crops."
-        "\n\nQuick guide:"
-        "\n1. You will be presented with a list of plants to choose from."
-        "\n2. Select the plants you're interested in by entering their "
-        "corresponding numbers."
-        "\n3. Decide whether you want to input a planting date or a desired "
-        "harvest date."
-        "\n4. Enter the date, and the app will calculate the corresponding "
-        "planting or harvest dates for you."
-        "\n5. You can save the results for future reference by providing your "
-        "email address."
-        "\n6. You can also view your previously stored data."
+        "\nThis application is designed to help you plan your planting and "
+        "harvesting times efficiently. Whether you're a seasoned gardener or "
+        "just starting out, this tool will guide you through the process of "
+        "determining the best dates for planting and harvesting your crops."
+        
         "\n\nLet's get started and make your gardening experience more "
         "organized and productive!"
     )
