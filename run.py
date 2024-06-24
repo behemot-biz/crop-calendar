@@ -21,6 +21,34 @@ SHEET = GSPPRED_CLIENT.open('crop_calendar')
 plants = SHEET.worksheet('plant_list')
 data_plants = plants.get_all_values()
 
+def display_menu(options):
+    clear_terminal()
+    print("Menu:")
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    while True:
+        try: 
+            choice = int(input("enter your choice: ").strip())
+            if 1 <= choice <= len(options):
+                return choice
+            else:
+                print(f"Please enter a number between 1 and {len(options)}")
+        except ValueError:
+            print("Invalid input,please enter a number")
+
+
+def main_menu():
+    options = ["Plan crops", "View stored data", "Exit"]
+    while True:
+        choice = display_menu(options)
+        if choice == 1:
+            select_plants()
+        elif choice == 2:
+            pass
+        elif choice == 3:
+            print("Thank you for using the Crop Calendar Planner!")
+            break
+
 
 def select_plants():
     """
@@ -272,11 +300,11 @@ def welcome_message():
     clear_terminal()
     print("Welcome to the Crop Calendar Planner!")
     print(
-        "\nThis application is designed to help you plan your planting and "
-        "harvesting times efficiently. Whether you're a seasoned gardener or "
-        "just starting out, this tool will guide you through the process of "
-        "determining the best dates for planting and harvesting your crops."
-        "\n\nHere's how to get started:"
+        "\n This application is designed to help you plan your planting and "
+        " harvesting times efficiently. Whether you're a seasoned gardener or "
+        " just starting out, this tool will guide you through the process of "
+        " determining the best dates for planting and harvesting your crops."
+        "\n\nQuick guide:"
         "\n1. You will be presented with a list of plants to choose from."
         "\n2. Select the plants you're interested in by entering their "
         "corresponding numbers."
@@ -336,4 +364,5 @@ def main():
 
 
 if __name__ == "__main__":
+    main_menu()
     main()
