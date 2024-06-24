@@ -65,6 +65,10 @@ def plan_crops():
 
 def view_stored_data():
     print("view stored data option")
+    email = input("Please enter your email address to fetch your stored data: ").strip()
+    user_data = fetch_user_data(email)
+    display_user_data(user_data)
+    input("\nPress Enter to return to the main menu...")
 
 
 def select_plants():
@@ -382,4 +386,4 @@ def main():
 
 if __name__ == "__main__":
     main_menu()
-    main()
+    # main()
