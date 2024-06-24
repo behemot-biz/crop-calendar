@@ -333,7 +333,7 @@ def store_results(email, results):
 
 def fetch_user_data(email):
     """
-    Fetch user data from the 'user_results' worksheet 
+    Fetch user data from the 'user_results' worksheet
     based on the provided email address.
 
     Args:
@@ -381,48 +381,6 @@ def display_user_data(user_data):
     print(results)
 
 
-def main():
-    """
-    Main function to run the Crop Calendar Planner application.
-    """
-    while True:
-        welcome_message()
-        user_choice = input(
-            "Would you like to (1) Plan crops or (2) View your stored data?"
-            " Enter 1 or 2: "
-        ).strip()
-
-        if user_choice == '1':
-            user_list = select_plants()
-            user_list_data = get_selected_plants(data_plants, user_list)
-
-            # Ask the user if they want to run the program again
-            repeat = input(
-                "\nWould you like to add more plants? (Y/N): "
-            ).strip().upper()
-            if repeat != 'Y':
-                print("Thank you for using the Crop Calendar Planner!")
-                break
-
-        elif user_choice == '2':
-            email = input(
-                "Please enter your email address to fetch your stored data: "
-            ).strip()
-            user_data = fetch_user_data(email)
-            display_user_data(user_data)
-
-            # Ask the user if they want to perform another action
-            repeat = input(
-                "\nWould you like to perform another action? (Y/N): "
-            ).strip().upper()
-            if repeat != 'Y':
-                print("Thank you for using the Crop Calendar Planner!")
-                break
-
-        else:
-            print("Invalid choice. Please enter 1 or 2.")
-
-
 if __name__ == "__main__":
+    welcome_message()
     main_menu()
-    # main()
