@@ -231,7 +231,16 @@ def get_selected_plants(data, user_selection):
 
         print("\nHarvest Schedule:\n")
         print(results)
+        return user_list_data, action, results
 
+
+def store_data_prompt(user_list_data):
+    """
+    Prompt the user to store data and handle the storage process.
+
+    Args:
+        user_list_data (list): The list of data to store.
+    """
     store_choice = input(
         "\nDo you want to store this data? (Y/N): "
     ).strip().upper()
@@ -242,7 +251,7 @@ def get_selected_plants(data, user_selection):
         print("Data has been stored successfully.")
     else:
         print("Data was not stored.")
-    return user_list_data, action, results
+    # return user_list_data, action, results
 
 
 def store_results(email, results):
