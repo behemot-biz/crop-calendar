@@ -106,8 +106,10 @@ def view_stored_data():
     """
     Function to view stored data by entering the user's email.
     """
+    clear_terminal()
+    print(" To view your plant data, you need to enter your email address.")
     email = input(
-        " Please enter your email address to fetch your stored data: "
+        " Enter email address: "
     ).strip()
     user_data = fetch_user_data(email)
     display_user_data(user_data)
@@ -122,17 +124,17 @@ def select_plants():
     Returns:
         list: A list of selected plant indices.
     """
-    clear_terminal() # petra
-    print("Plant menu: \n")
+    clear_terminal()
+    print("\n Plant menu: \n")
     table_creator = TableCreator(data_plants)
     table = table_creator.create_main_table()
 
     print(f"{table} \n")
-    print("Type in the plant number from the list above, if you want multiple")
-    print("plants, use comma sign to separate them. Example: 1,8,12\n")
+    print(" Type in the plant number from the list above, if you want multiple")
+    print(" plants, use comma sign to separate them. Example: 1,8,12\n")
 
     while True:
-        data_str = input("Enter one or more plant numbers: ")
+        data_str = input(" Enter one or more plant numbers: ")
 
         selected_plants = data_str.split(",")
         user_list = []
@@ -144,13 +146,13 @@ def select_plants():
                 if str(idx) in data_plants[idx][0]:
                     user_list.append(idx)
             except IndexError:
-                print(f"IndexError: The item {idx} does not exist,")
-                print(f"select a number from the list.")
+                print(f" IndexError: The item {idx} does not exist,")
+                print(f" select a number from the list.")
                 valid_input = False
                 break
             except ValueError:
-                print(f"Invalid input '{plant_id}'.")
-                print(f"Please enter numbers only.")
+                print(f" Invalid input '{plant_id}'.")
+                print(f" Please enter numbers only.")
                 valid_input = False
                 break
 
