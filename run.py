@@ -107,7 +107,7 @@ def view_stored_data():
     Function to view stored data by entering the user's email.
     """
     clear_terminal()
-    print(" To view your plant data, you need to enter your email address.")
+    print("\n To view your plant data, you need to enter your email address.\n")
     email = input(
         " Enter email address: "
     ).strip()
@@ -359,7 +359,7 @@ def display_user_data(user_data):
 
     results.border = False
     results.align = "l"
-    results.padding_width = 5
+    results.padding_width = 3
     results.field_names = [
         "Plant", "Date Type", "Date", "Corresponding Date"
     ]
