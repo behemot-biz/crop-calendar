@@ -43,18 +43,18 @@ def display_menu(options):
         int: The user's selected option.
     """
     clear_terminal()
-    print("Menu:")
+    print("\n Menu:\n")
     for i, option in enumerate(options, start=1):
-        print(f"{i}. {option}")
+        print(f" {i}. {option}")
     while True:
         try:
-            choice = int(input("enter your choice: ").strip())
+            choice = int(input("\n Enter your choice: ").strip())
             if 1 <= choice <= len(options):
                 return choice
             else:
-                print(f"Please enter a number between 1 and {len(options)}")
+                print(f" Please enter a number between 1 and {len(options)}")
         except ValueError:
-            print("Invalid input,please enter a number")
+            print(" Invalid input,please enter a number")
 
 
 def main_menu():
@@ -69,7 +69,7 @@ def main_menu():
         elif choice == 2:
             view_stored_data()
         elif choice == 3:
-            print("Thank you for using the Crop Calendar Planner!")
+            print(" Thank you for using the Crop Calendar Planner!")
             break
 
 
@@ -79,7 +79,7 @@ def welcome_message():
     Crop Calendar Planner app.
     """
     clear_terminal()
-    print(" Welcome to the Crop Calendar Planner!\n")
+    print("\n Welcome to the Crop Calendar Planner!\n")
     print(" This application is designed to help you plan your planting and ")
     print(" harvesting times efficiently. Whether you're a seasoned gardener or ")
     print(" just starting out, this tool will guide you through the process of ")
@@ -107,11 +107,11 @@ def view_stored_data():
     Function to view stored data by entering the user's email.
     """
     email = input(
-        "Please enter your email address to fetch your stored data: \n"
+        " Please enter your email address to fetch your stored data: "
     ).strip()
     user_data = fetch_user_data(email)
     display_user_data(user_data)
-    input("\nPress Enter to return to the main menu...")
+    input("\n Press Enter to return to the main menu...")
 
 
 def select_plants():
@@ -132,7 +132,7 @@ def select_plants():
     print("plants, use comma sign to separate them. Example: 1,8,12\n")
 
     while True:
-        data_str = input("Enter one or more plant numbers: \n")
+        data_str = input("Enter one or more plant numbers: ")
 
         selected_plants = data_str.split(",")
         user_list = []
@@ -169,15 +169,15 @@ def get_action():
     """
     while True:
         action = input(
-            "Do you want to plan for planting seeds (P) "
-            "or a date for harvest (H)?\n"
+            "\n Do you want to plan for planting seeds (P) "
+            "or a date for harvest (H)?"
         ).strip().upper()
 
         if action in ['P', 'H']:
             return action
         else:
-            print("Invalid choice.")
-            print("Please enter 'P' for planting or 'H' for harvest.")
+            print(" Invalid choice.")
+            print(" Please enter 'P' for planting or 'H' for harvest.")
 
 
 def get_date():
@@ -188,13 +188,13 @@ def get_date():
         str: A valid date string in YYYY-MM-DD format.
     """
     while True:
-        date_str = input("Enter the date (YYYY-MM-DD): \n").strip()
+        date_str = input(" Enter the date (YYYY-MM-DD): ").strip()
         try:
             input_date = datetime.strptime(date_str, "%Y-%m-%d")
             return date_str
         except ValueError:
-            print("Invalid date format.")
-            print("Please enter the date in YYYY-MM-DD format.")
+            print(" Invalid date format.")
+            print(" Please enter the date in YYYY-MM-DD format.")
 
 
 def get_selected_plants(data, user_selection):
@@ -251,7 +251,7 @@ def get_selected_plants(data, user_selection):
                 harvest_date.strftime('%Y-%m-%d')
             ])
 
-        print("\nPlanting Schedule: \n")
+        print("\n Planting Schedule: \n")
         print(results)
 
     elif action == 'H':
@@ -273,7 +273,7 @@ def get_selected_plants(data, user_selection):
                 planting_date.strftime('%Y-%m-%d')
             ])
 
-        print("\nHarvest Schedule:\n")
+        print("\n Harvest Schedule:\n")
         print(results)
 
     return user_list_data, action, results
@@ -287,15 +287,17 @@ def store_data_prompt(user_list_data):
         user_list_data (list): The list of data to store.
     """
     store_choice = input(
-        "\nDo you want to store this data? (Y/N): \n"
+        "\n Do you want to store this data? (Y/N): "
     ).strip().upper()
 
     if store_choice == 'Y':
-        email = input("Enter your email address: \n").strip()
+        email = input(" Enter your email address: ").strip()
         store_results(email, user_list_data)
-        print("Data has been stored successfully.")
+        print(" Data has been stored successfully.")
+        input("\n Press Enter to return to the main menu...")
     else:
-        print("Data was not stored.")
+        print(" Data was not stored.")
+        input("\n Press Enter to return to the main menu...")
 
 
 def store_results(email, results):
@@ -348,8 +350,9 @@ def display_user_data(user_data):
         user_data (list): The list of user data records.
     """
     if not user_data:
-        print("No data found for the provided email address.")
+        print(" No data found for the provided email address.")
         return
+
     results = PrettyTable()
     results.field_names = [
         "Plant", "Date Type", "Date", "Corresponding Date"
@@ -363,7 +366,7 @@ def display_user_data(user_data):
             record["Corresponding Date"]
         ])
 
-    print("\nYour Stored Data:\n")
+    print("\n Your Stored Data:\n")
     print(results)
 
 
