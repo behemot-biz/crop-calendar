@@ -356,6 +356,10 @@ def display_user_data(user_data):
         return
 
     results = PrettyTable()
+
+    results.border = False
+    results.align = "l"
+    results.padding_width = 5
     results.field_names = [
         "Plant", "Date Type", "Date", "Corresponding Date"
     ]
