@@ -79,31 +79,26 @@ def welcome_message():
     Crop Calendar Planner app.
     """
     clear_terminal()
-    print("Welcome to the Crop Calendar Planner!")
-    print(
-        "\nThis application is designed to help you plan your planting and "
-        "harvesting times efficiently. Whether you're a seasoned gardener or "
-        "just starting out, this tool will guide you through the process of "
-        "determining the best dates for planting and harvesting your crops."
+    print(" Welcome to the Crop Calendar Planner!\n")
+    print(" This application is designed to help you plan your planting and ")
+    print(" harvesting times efficiently. Whether you're a seasoned gardener or ")
+    print(" just starting out, this tool will guide you through the process of ")
+    print(" determining the best dates for planting and harvesting your crops.")
         
-        "\n\nLet's get started and make your gardening experience more "
-        "organized and productive!"
-    )
-    input("\nPress Enter to continue...")
+    print("\n\n Let's get started and make your gardening experience")
+    print(" more organized and productive!")
+    input("\n Press Enter to continue...")
 
 
 def plan_crops():
     """
     Function to plan crops by selecting plants and calculating dates.
     """
-    # print("plan crops option")
     user_list = select_plants()
     if user_list:
         user_list_data, action, results = get_selected_plants(
             data_plants, user_list
         )
-        print("\nResults:\n")
-        print(results)
         store_data_prompt(user_list_data)
 
 
@@ -112,7 +107,7 @@ def view_stored_data():
     Function to view stored data by entering the user's email.
     """
     email = input(
-        "Please enter your email address to fetch your stored data: "
+        "Please enter your email address to fetch your stored data: \n"
     ).strip()
     user_data = fetch_user_data(email)
     display_user_data(user_data)
@@ -127,7 +122,8 @@ def select_plants():
     Returns:
         list: A list of selected plant indices.
     """
-    clear_terminal()
+    clear_terminal() # petra
+    print("Plant menu: \n")
     table_creator = TableCreator(data_plants)
     table = table_creator.create_main_table()
 
@@ -291,11 +287,11 @@ def store_data_prompt(user_list_data):
         user_list_data (list): The list of data to store.
     """
     store_choice = input(
-        "\nDo you want to store this data? (Y/N): "
+        "\nDo you want to store this data? (Y/N): \n"
     ).strip().upper()
 
     if store_choice == 'Y':
-        email = input("Enter your email address: ").strip()
+        email = input("Enter your email address: \n").strip()
         store_results(email, user_list_data)
         print("Data has been stored successfully.")
     else:
