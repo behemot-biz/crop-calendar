@@ -60,7 +60,7 @@ def plan_crops():
         user_list_data, action, results = get_selected_plants(data_plants, user_list)
         print("\nResults:\n")
         print(results)
-        
+        store_data_prompt(user_list_data)
 
 
 def view_stored_data():
@@ -231,7 +231,8 @@ def get_selected_plants(data, user_selection):
 
         print("\nHarvest Schedule:\n")
         print(results)
-        return user_list_data, action, results
+
+    return user_list_data, action, results
 
 
 def store_data_prompt(user_list_data):
@@ -251,7 +252,7 @@ def store_data_prompt(user_list_data):
         print("Data has been stored successfully.")
     else:
         print("Data was not stored.")
-    # return user_list_data, action, results
+
 
 
 def store_results(email, results):
@@ -262,7 +263,6 @@ def store_results(email, results):
         email (str): The user's email address.
         results (list): The list of results to store.
     """
-
     results_sheet = SHEET.worksheet('user_results')
 
     if len(results_sheet.get_all_values()) == 0:
