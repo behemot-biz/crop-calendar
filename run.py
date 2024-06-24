@@ -145,6 +145,10 @@ def select_plants():
                 idx = int(plant_id.strip())
                 if str(idx) in data_plants[idx][0]:
                     user_list.append(idx)
+                elif idx < 0:
+                    print(f" Invalid input '{idx}'. Please enter positive numbers only.")
+                    valid_input = False
+                    break
             except IndexError:
                 print(f" IndexError: The item {idx} does not exist,")
                 print(f" select a number from the list.")
