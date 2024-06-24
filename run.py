@@ -42,12 +42,29 @@ def main_menu():
     while True:
         choice = display_menu(options)
         if choice == 1:
-            select_plants()
+            plan_crops()
         elif choice == 2:
-            pass
+            view_stored_data()
         elif choice == 3:
             print("Thank you for using the Crop Calendar Planner!")
             break
+
+
+def plan_crops():
+    """
+    Function to plan crops by selecting plants and calculating dates.
+    """
+    # print("plan crops option")
+    user_list = select_plants()
+    if user_list:
+        user_list_data, action, results = get_selected_plants(data_plants, user_list)
+        print("\nResults:\n")
+        print(results)
+        
+
+
+def view_stored_data():
+    print("view stored data option")
 
 
 def select_plants():
