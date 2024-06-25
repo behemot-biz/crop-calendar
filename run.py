@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from classes.table_creator import TableCreator
+from classes.user_data import UserData
 from datetime import datetime, timedelta
 from classes.plant import Plant
 from prettytable import PrettyTable
@@ -54,14 +55,14 @@ def display_menu(options):
             else:
                 print(f" Please enter a number between 1 and {len(options)}")
         except ValueError:
-            print(" Invalid input,please enter a number")
+            print(" Invalid input, please enter a number")
 
 
 def main_menu():
     """
     Display the main menu and handle user selection.
     """
-    options = ["Plan crops", "View stored data", "Exit"]
+    options = ["Plan crops", "View stored data", "Exit crop calculator"]
     while True:
         choice = display_menu(options)
         if choice == 1:
@@ -300,7 +301,8 @@ def store_data_prompt(user_list_data):
 
     if store_choice == 'Y':
         email = input(" Enter your email address: ").strip()
-        store_results(email, user_list_data)
+        user_data = UserData(email, user_list_data)
+        store_results(user_data)
         print(" Data has been stored successfully.")
         input("\n Press Enter to return to the main menu...")
     else:
@@ -308,13 +310,12 @@ def store_data_prompt(user_list_data):
         input("\n Press Enter to return to the main menu...")
 
 
-def store_results(email, results):
+def store_results(user_data):
     """
     Store the user's results in the 'user_results' worksheet.
 
     Args:
-        email (str): The user's email address.
-        results (list): The list of results to store.
+        user_data (UserData): The user's data object.
     """
     results_sheet = SHEET.worksheet('user_results')
 
@@ -323,8 +324,8 @@ def store_results(email, results):
             "Email", "Plant", "Date Type", "Date", "Corresponding Date"
         ])
 
-    for result in results:
-        results_sheet.append_row([email] + result)
+    for result in user_data.get_data():
+        results_sheet.append_row([user_data.email] + result)
 
 
 def fetch_user_data(email):
