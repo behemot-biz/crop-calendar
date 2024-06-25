@@ -8,6 +8,52 @@ The Crop Calendar Planner is an application designed to help users plan their pl
 ### Project Purpose
 The aim of this project is to create a practical tool for gardeners to plan their planting and harvesting schedules. The application provides a simple interface to select crops and calculate the best dates for planting and harvesting based on various growth stages.
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+   - [Project Description](#project-description)
+   - [Project Purpose](#project-purpose)
+2. [User Stories](#user-stories)
+   - [Gardener](#gardener)
+3. [Flowchart](#flowchart)
+   - [1. User Interaction Flowchart](#1-user-interaction-flowchart)
+   - [2. Plan Crops Flowchart](#2-plan-crops-flowchart)
+   - [3. View Stored Data Flowchart](#3-view-stored-data-flowchart)
+4. [Features](#features)
+   - [Welcome screen](#welcome-screen)
+   - [Menu](#menu)
+   - [Plan Crops](#plan-crops)
+     - [Plan planting seeds](#plan-planting-seeds)
+     - [Plan Harvest Crop](#plan-harvest-crop)
+   - [View stored data](#view-stored-data)
+   - [Exit Application](#exit-application)
+5. [Python Functionality](#python-functionality)
+   - [Core Functions](#core-functions)
+6. [Modules](#modules)
+   - [plant.py](#plantpy)
+   - [table_creator.py](#table_creatorpy)
+   - [user_data.py](#user_datapy)
+7. [Google Sheets Document: 'crop_calendar'](#google-sheets-document-crop_calendar)
+   - [Overview](#overview)
+   - [Worksheets Description](#worksheets-description)
+   - [Integration with the Application](#integration-with-the-application)
+8. [Libraries Used](#libraries-used)
+   - [Python Libraries](#python-libraries)
+9. [Installation](#installation)
+10. [Testing](#testing)
+    - [Continuous Testing During Development](#continuous-testing-during-development)
+    - [Issues Found During Development](#issues-found-during-development)
+    - [Functionality Test (Manual Testing)](#functionality-test-manual-testing)
+    - [Code validation](#code-validation)
+11. [Deployment - Heroku platform](#deployment---heroku-platform)
+    - [Local Development](#local-development)
+      - [How to Fork](#how-to-fork)
+      - [How to Clone](#how-to-clone)
+12. [Technologies](#technologies)
+13. [Ideas for Future Implementation](#ideas-for-future-implementation)
+14. [Note on View Stored Data](#note-on-view-stored-data)
+15. [Credits](#credits)
+
 ## User Stories
 The Crop Calendar Planner is designed to provide an efficient and easy-to-use experience for gardeners looking to plan their crop schedules.
 
@@ -215,7 +261,7 @@ This flowchart illustrates the process of retrieving and displaying stored data 
 ## Modules
 
 ### plant.py
-The `plant.py` module defines the `Plant` class and its subclasses, encapsulating the properties and behavior of different types of plants.
+The `plant.py` module defines the `Plant` class and its subclasses, encapsulating the properties and behaviour of different types of plants.
 
 #### Plant Class
 - **Attributes:**
@@ -387,7 +433,7 @@ During the development and continuous testing of the Crop Calendar Planner, two 
 **Solution**: The function was updated to include a validation check that ensures only positive numbers are accepted.
 
 #### 2. Bug in `get_selected_plants():` Accidental Indentation of the Return Values
-**Issue**: In the get_selected_plants() function, an accidental indentation of the return statement caused the function to not return the expected values in certain conditions, leading to unexpected behavior.
+**Issue**: In the get_selected_plants() function, an accidental indentation of the return statement caused the function to not return the expected values in certain conditions, leading to unexpected behaviour.
 
 **Solution**: The indentation of the return statement was corrected to ensure the function returns the expected values correctly.
 
@@ -488,7 +534,7 @@ To clone the repository:
 - [CI Python Linter](https://pep8ci.herokuapp.com/#) (Python code validation)
 - [Google Sheets](https://docs.google.com/spreadsheets) (data storage)
 - [Google Sheets API](https://developers.google.com/sheets/api) (data interaction)
-- [Lucidchart](https://lucid.app/) (flowshart creation)
+- [Lucidchart](https://lucid.app/) (flowchart creation)
 - [Dillinger](https://dillinger.io) (Readme editor)
 
 ## Ideas for Future Implementation
@@ -506,6 +552,12 @@ Currently, the "View Stored Data" feature in the Crop Calendar Planner applicati
 This is an area for future improvement, where implementing a loop to handle incorrect email entries would enhance the user experience by allowing multiple attempts to enter a valid email address.
 
 ## Credits
+### Content
+
+- [Python OOP series](https://www.youtube.com/watch?v=ZDa-Z5JzLYM&feature=youtu.be) by Corey Schafer to learn more about python object-oriented programming.
+- [Code Institute Template](https://github.com/Code-Institute-Org/p3-template) used as template and a way to run the application on the heroku platform
+- The "I love sandwiches walkthrough" project from Code Institute as a reference on how to set up my data connection to google sheets.
+
 
 ### Code inspiration
 - [PrettyTable Documentation](https://pypi.org/project/prettytable/) for table formatting
@@ -513,7 +565,6 @@ This is an area for future improvement, where implementing a loop to handle inco
 - [Google Sheets API Documentation](https://developers.google.com/sheets/api) for API interaction
 
 **Readme guidance**
-
 [README.md - How, What and When?](https://www.youtube.com/watch?v=l1DE7L-4eKQ)
 
 **Thanks to my friends and family for testing the application and providing feedback.**
