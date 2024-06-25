@@ -419,17 +419,10 @@ All files passed the CI Python Linter without errors
 <details>
 <summary>View Python validation results</summary>
 
-![Python Validation](readme-images/python-validation.png)
-</details>
-
-### Performance test - Lighthouse
-
-#### Desktop
-
-<details>
-<summary>Result start/home page</summary>
-
-![Index page - desktop](readme-images/lighthouse-index-desktop.png)
+![run.py](readme_images/linter_run.png)
+![user_data.py](readme_images/linter_user_data.png)
+![table_creator.py](readme_images/linter_table_creator.png)
+![plant.py](readme_images/linter_plant.png)
 </details>
 
 
