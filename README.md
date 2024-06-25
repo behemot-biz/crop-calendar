@@ -49,7 +49,7 @@ This flowchart outlines the steps a user takes to interact with the Crop Calenda
 <details>
 <summary>Flowchart - Plan Crops (image of)</summary>
 
-![flowchart](readme_images/flowchart_menu.png)
+![flowchart](readme_images/flowchart_plan_crop.png)
 </details>
 
 **Description**:
@@ -79,7 +79,7 @@ This flowchart details the process of planning crops, including selecting plants
 <details>
 <summary>Flowchart - View Stored Data (image of)</summary>
 
-![Prototype](readme-images/flowchart_view_stored_data.png)
+![flowchart](readme_images/flowchart_view_stored_data.png)
 </details>
 
 **Description**:
@@ -98,17 +98,72 @@ This flowchart illustrates the process of retrieving and displaying stored data 
 
 ## Features
 
-### Welcome screen
-Intro to the app
-    
+#### Welcome screen
 
-### Menu
+![Welcome Screen](readme_images/welcome_screen.png)
 
-### Main Application Area
-- **Plant Selection Area:** Displays the list of available plants for selection.
-- **Schedule Display:** Shows the calculated planting and harvesting schedule.
-- **User Input Area:** Allows users to input dates and actions for planning.
+#### Menu
 
+![Menu Screen](readme_images/main_menu.png)
+
+#### Plan Crops
+
+**Plan planting seeds**
+
+![Plant listing Screen](readme_images/plant_listing.png)
+
+<details>
+<summary>Select plant seeds and enter plant date (image of)</summary>
+
+![Select plant seeds and enter plant date](readme_images/plant_enter_date.png)
+</details>
+
+<details>
+<summary>Save list result (image of)</summary>
+
+![Save list result](readme_images/plant_list_save.png)
+</details>
+
+<details>
+<summary>Add email address (image of)</summary>
+
+![Add email address](readme_images/plant_list_save_email.png)
+</details>
+
+
+
+**Plan Harvest Crop**
+
+![Plant listing Screen](readme_images/plant_listing.png)
+
+<details>
+<summary>Select Harvest and enter harvest date (image of)</summary>
+
+![harvest  enter date](readme_images/harvest_enter_date.png)<br>
+![Harvest save list result](readme_images/harvest_list_save.png)<br>
+![Harvest add email address](readme_images/harvest_list_save_email.png)
+</details>
+
+<details>
+<summary> (image of)</summary>
+
+
+</details>
+
+<details>
+<summary> (image of)</summary>
+
+
+</details>
+
+<details>
+<summary> (image of)</summary>
+
+![alt text](readme_images/harvest_list.png)
+</details>
+
+#### Exit Application
+![Exit Application](readme_images/exit_app.png)
 
 
 
@@ -227,7 +282,34 @@ pip3 install gspread
 pip3 install google-auth
 pip3 install prettytable
 ```
+
 ## Testing
+
+## Continuous Testing During Development
+
+Throughout the development of the Crop Calendar Planner application, continuous testing was a crucial practice to ensure the reliability and functionality of the code. This involved regularly running tests after implementing new features or making changes to existing ones. By integrating testing into the development workflow, potential issues could be identified and resolved early, leading to a more robust and error-free application.
+
+### Continuous Testing Benefits
+
+- **Early Detection of Bugs**: By testing continuously, bugs and issues are detected early in the development process, making them easier to fix.
+- **Improved Code Quality**: Regular testing helps maintain high code quality and ensures that new changes do not introduce regressions.
+- **Enhanced Reliability**: Continuous testing ensures that the application remains reliable and functional as new features are added or existing ones are modified.
+- **Increased Developer Confidence**: Knowing that the code is thoroughly tested gives developers confidence in their changes and the overall stability of the application.
+
+### Issues Found During Development
+
+During the development and continuous testing of the Crop Calendar Planner, two notable issues were identified and resolved:
+
+#### 1. Bug in `select_plants():` Accepted Negative Values
+
+**Issue**: The `select_plants()` function was designed to allow users to select plants by entering their numbers. However, the function erroneously accepted negative values, which are invalid inputs.
+
+**Solution**: The function was updated to include a validation check that ensures only positive numbers are accepted.
+
+#### 2. Bug in `get_selected_plants():` Accidental Indentation of the Return Values
+**Issue**: In the get_selected_plants() function, an accidental indentation of the return statement caused the function to not return the expected values in certain conditions, leading to unexpected behavior.
+
+**Solution**: The indentation of the return statement was corrected to ensure the function returns the expected values correctly.
 
 ### Functionality Test (Manual Testing)
 Tested across different devices and browsers to ensure the application works correctly.
@@ -347,6 +429,7 @@ To clone the repository:
 
 ### Code inspiration
 - [PrettyTable Documentation](https://pypi.org/project/prettytable/) for table formatting
+- [Clear terminal](https://stackoverflow.com/questions/64400700/how-do-i-clear-the-console-using-python-script) to clear screen
 - [Google Sheets API Documentation](https://developers.google.com/sheets/api) for API interaction
 
 **Readme guidance**
