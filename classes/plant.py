@@ -1,7 +1,42 @@
 class Plant:
+    """
+    A class to represent a plant with its growth stages and description.
+
+    Attributes:
+    -----------
+    id : str
+        The plant's unique identifier.
+    name : str
+        The name of the plant.
+    category : str
+        The category of the plant.
+    germination : int or None
+        The number of days for the germination stage.
+    seedling_stage : int or None
+        The number of days for the seedling stage.
+    vegetative_growth : int or None
+        The number of days for the vegetative growth stage.
+    flowering_root_development : int or None
+        The number of days for the flowering/root development stage.
+    fruit_development : int or None
+        The number of days for the fruit development stage.
+    description : str
+        A brief description of the plant.
+
+    Methods:
+    --------
+    parse_int(value)
+        Converts a value to an integer, returns None if conversion fails.
+    total_growth_time()
+        Calculates the total growth time of the plant.
+    summary()
+        Provides a summary of the plant's attributes.
+    """
+
     def __init__(self, id, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development,
                  fruit_development, description):
+
         self.id = id
         self.name = name
         self.category = category
@@ -15,12 +50,33 @@ class Plant:
         self.description = description
 
     def parse_int(self, value):
+        """
+        Converts a value to an integer, returns None if conversion fails.
+
+        Parameters:
+        -----------
+        value : str or int
+            The value to convert to an integer.
+
+        Returns:
+        --------
+        int or None
+            The converted integer or None if conversion fails.
+        """
         try:
             return int(value)
         except (ValueError, TypeError):
             return None
 
     def total_growth_time(self):
+        """
+        Calculates the total growth time of the plant.
+
+        Returns:
+        --------
+        int
+            The total number of days for all growth stages.
+        """
         stages = [
             self.germination, self.seedling_stage, self.vegetative_growth,
             self.flowering_root_development, self.fruit_development
@@ -28,6 +84,14 @@ class Plant:
         return sum(stage for stage in stages if stage is not None)
 
     def summary(self):
+        """
+        Provides a summary of the plant's attributes.
+
+        Returns:
+        --------
+        str
+            A string summary of the plant's attributes.
+        """
         return (
             f"Plant: {self.name}\n"
             f"Category: {self.category}\n"
@@ -41,14 +105,16 @@ class Plant:
             f"Description: {self.description}"
         )
 
-    # def __str__(self):
-    #     return self.summary()
 
-
-# Subclasses
 class Legume(Plant):
+    """
+    A class to represent a legume, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development, description):
+
         super().__init__(name, category, germination,
                          seedling_stage, vegetative_growth,
                          flowering_root_development,
@@ -56,48 +122,92 @@ class Legume(Plant):
 
 
 class RootVegetable(Plant):
+    """
+    A class to represent a root vegetable, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development, description):
+
         super().__init__(name, category, germination,
                          seedling_stage, vegetative_growth,
                          flowering_root_development, None, description)
 
 
 class FruitVegetable(Plant):
+    """
+    A class to represent a fruit vegetable, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development,
                  fruit_development, description):
+
         super().__init__(name, category, germination, seedling_stage,
                          vegetative_growth, flowering_root_development,
                          fruit_development, description)
 
 
 class LeafyGreen(Plant):
+    """
+    A class to represent a leafy green, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development, description):
+
         super().__init__(name, category, germination, seedling_stage,
                          vegetative_growth, flowering_root_development,
                          None, description)
 
 
 class Bulb(Plant):
+    """
+    A class to represent a bulb, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development,
                  fruit_development, description):
+
         super().__init__(name, category, germination, seedling_stage,
                          vegetative_growth, flowering_root_development,
                          fruit_development, description)
 
 
 class Herb(Plant):
+    """
+    A class to represent an herb, a type of plant.
+
+    Inherits from the Plant class.
+    """
     def __init__(self, name, category, germination, seedling_stage,
                  vegetative_growth, flowering_root_development, description):
+
         super().__init__(name, category, germination, seedling_stage,
                          vegetative_growth, flowering_root_development,
                          None, description)
 
 
 def create_plant_instance(plant_data):
+    """
+    Creates a plant instance from a dictionary of plant data.
+
+    Parameters:
+    -----------
+    plant_data : dict
+        A dictionary containing plant data with keys
+        corresponding to plant attributes.
+
+    Returns:
+    --------
+    tuple
+        A tuple containing the plant attributes.
+    """
     id = plant_data["id"]
     name = plant_data["Name"]
     category = plant_data["Category"]
