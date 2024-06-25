@@ -25,7 +25,7 @@ The Crop Calendar Planner application helps users plan their planting and harves
 <details>
 <summary>Flowchart - Menu (image of)</summary>
 
-![Prototype](readme-images/flowchart_menu.png)
+![Flowchart](readme_images/flowchart_menu.png)
 </details>
 
 
@@ -130,6 +130,11 @@ This flowchart illustrates the process of retrieving and displaying stored data 
 ![Add email address](readme_images/plant_list_save_email.png)
 </details>
 
+<details>
+<summary>Plant list saved (image of)</summary>
+
+![Plant list saved](readme_images/plant_list_saved.png)
+</details>
 
 
 **Plan Harvest Crop**
@@ -139,33 +144,54 @@ This flowchart illustrates the process of retrieving and displaying stored data 
 <details>
 <summary>Select Harvest and enter harvest date (image of)</summary>
 
-![harvest  enter date](readme_images/harvest_enter_date.png)<br>
-![Harvest save list result](readme_images/harvest_list_save.png)<br>
+![harvest enter date](readme_images/harvest_enter_date.png)
+</details>
+
+<details>
+<summary>Save list result (image of)</summary>
+
+![Harvest save list result](readme_images/harvest_list_save.png)
+</details>
+
+<details>
+<summary>Add email address (image of)</summary>
+
 ![Harvest add email address](readme_images/harvest_list_save_email.png)
 </details>
 
 <details>
-<summary> (image of)</summary>
+<summary>Harvest list saved (image of)</summary>
+
+![Harvest list saved](readme_images/harvest_saved.png)
+</details>
 
 
+**View stored data**
+
+![View stored result, prompt for email address](readme_images/view_stored_result_prompt_for_email.png)
+
+<details>
+<summary>View stored result, enter email address (image of)</summary>
+
+![View stored result, enter email address](readme_images/view_stored_result_email.png)
 </details>
 
 <details>
-<summary> (image of)</summary>
+<summary>View stored result - display list (image of)</summary>
 
-
+![View stored result - display list](readme_images/view_stored_result_display_list.png)
 </details>
 
 <details>
-<summary> (image of)</summary>
+<summary>View stored result - display full list after entering harvest dates (image of)</summary>
 
-![alt text](readme_images/harvest_list.png)
+![View stored result - display full list after entering harvest dates](readme_images/view_stored_result_display_list_full.png)
 </details>
+
 
 #### Exit Application
+
 ![Exit Application](readme_images/exit_app.png)
-
-
 
 
 ## Python Functionality
@@ -242,6 +268,60 @@ The `user_data.py` module defines the `UserData` class, which encapsulates user 
   - `get_email(self)`: Returns the email address.
   - `add_data(self, data_entry)`: Adds a new data entry to the data list.
   - `get_data(self)`: Returns the list of data entries.
+
+
+## Google Sheets Document: 'crop_calendar'
+The **crop_calendar** Google Sheets document is an integral part of the Crop Calendar Planner application. It serves as the primary data source for the application's plant information and user data storage.
+
+### Overview
+The crop_calendar Google Sheets document contains multiple worksheets that store essential data for the Crop Calendar Planner application. These worksheets include:
+
+1. **plant_list**: Stores information about various plants, including their growth stages and descriptions.
+2. **user_results**: Stores user-specific planting and harvesting schedules based on the user's email address.
+
+### Worksheets Description
+**plant_list**
+The plant_list worksheet contains detailed information about each plant that can be selected and managed within the application. Each row in this worksheet represents a different plant and includes the following columns:
+
+- **ID**: A unique identifier for each plant.
+- **Name**: The name of the plant.
+- **Category**: The category to which the plant belongs (e.g., legume, root vegetable, fruit vegetable, leafy green, bulb, herb).
+- **Germination**: The number of days required for the plant to germinate.
+- **Seedling Stage**: The number of days for the seedling stage.
+- **Vegetative Growth**: The number of days for vegetative growth.
+- **Flowering/Root Development**: The number of days for flowering or root development.
+- **Fruit Development**: The number of days for fruit development (if applicable).
+- **Description**: A brief description of the plant, including any relevant details about its growth and care.
+
+<details>
+<summary>Here is a sample structure of the plant_list worksheet:</summary>
+
+![plant_list worksheet](readme_images/plant_list_worksheet.png)
+</details>
+
+
+**user_results**
+The **user_results** worksheet is used to store the planting and harvesting schedules for each user. Each row in this worksheet represents a record of a user's planting or harvesting schedule and includes the following columns:
+
+- **Email**: The email address of the user.
+- **Plant**: The name of the plant.
+- **Date Type**: Indicates whether the date is for planting or harvesting.
+- **Date**: The date entered by the user.
+- **Corresponding Date**: The calculated corresponding date (e.g., if the entered date is for planting, this would be the estimated harvest date, and vice versa).
+
+<details>
+<summary>Here is a sample structure of the user_results worksheet:</summary>
+
+![user_results worksheet](readme_images/user_results_worksheet.png)
+</details>
+
+### Integration with the Application
+The Crop Calendar Planner application interacts with the crop_calendar Google Sheets document using the gspread library, which allows for seamless reading and writing of data. The application performs the following operations:
+
+- **Reading Plant Data**: The application reads data from the plant_list worksheet to display available plants and their growth stages to the user.
+- **Storing User Data**: The application writes user-specific planting and harvesting schedules to the user_results worksheet, associating each record with the user's email address.
+- **Fetching User Data**: The application retrieves user-specific data from the user_results worksheet based on the email address provided by the user.
+
 
 ## Libraries Used
 
@@ -424,6 +504,13 @@ To clone the repository:
 - 
 - Advanced configuration options for crop planning
 - Historical data analysis for improved scheduling
+
+
+### Note on View Stored Data
+
+Currently, the "View Stored Data" feature in the Crop Calendar Planner application prompts the user to enter their email address to retrieve stored data. However, the functionality to prompt the user to re-enter their email address if no matching data is found has not yet been implemented. As a result, if the entered email does not match any stored records, the user will not be prompted to try again and will need to restart the process.
+
+This is an area for future improvement, where implementing a loop to handle incorrect email entries would enhance the user experience by allowing multiple attempts to enter a valid email address.
 
 ## Credits
 
